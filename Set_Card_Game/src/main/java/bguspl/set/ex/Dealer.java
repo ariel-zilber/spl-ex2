@@ -132,12 +132,12 @@ public class Dealer implements Runnable {
      * Reset and/or update the countdown and the countdown display.
      */
     private void updateTimerDisplay(boolean reset) {
-       // long  currentTimeMillis= System.currentTimeMillis();
         // TODO implement
         if(reset){
             this.reshuffleTime=System.currentTimeMillis()+this.env.config.turnTimeoutMillis;
         }
-        this.env.ui.setCountdown(this.reshuffleTime-System.currentTimeMillis(),false);
+        long diff=this.reshuffleTime-System.currentTimeMillis();
+        this.env.ui.setCountdown(diff,diff<this.env.config.turnTimeoutWarningMillis);
     }
 
     /**
