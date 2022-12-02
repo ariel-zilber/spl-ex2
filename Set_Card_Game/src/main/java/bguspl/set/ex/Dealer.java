@@ -52,10 +52,11 @@ public class Dealer implements Runnable {
     @Override
     public void run() {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
+        updateTimerDisplay(true);
         while (!shouldFinish()) {
             placeCardsOnTable();
             timerLoop();
-            updateTimerDisplay(false);
+            updateTimerDisplay(true);
             removeAllCardsFromTable();
         }
         announceWinners();
@@ -104,6 +105,20 @@ public class Dealer implements Runnable {
      */
     private void placeCardsOnTable() {
         // TODO implement
+        for(int i=0;i<this.table.slotToCard.length;i++){
+
+            // case deck is empty
+            if(this.deck.size()==0){return;}
+
+            // place case empty
+            if(this.table.slotToCard[i]==null){
+               // remove first
+               int card=this.deck.get(0);
+                this.deck.remove(0);
+                this.table.placeCard(card,i);
+            }
+        }
+
     }
 
     /**
@@ -117,7 +132,12 @@ public class Dealer implements Runnable {
      * Reset and/or update the countdown and the countdown display.
      */
     private void updateTimerDisplay(boolean reset) {
+       // long  currentTimeMillis= System.currentTimeMillis();
         // TODO implement
+        if(reset){
+            this.reshuffleTime=System.currentTimeMillis()+this.env.config.turnTimeoutMillis;
+        }
+        this.env.ui.setCountdown(this.reshuffleTime-System.currentTimeMillis(),false);
     }
 
     /**
@@ -125,6 +145,13 @@ public class Dealer implements Runnable {
      */
     private void removeAllCardsFromTable() {
         // TODO implement
+        for(int i=0;i<this.table.slotToCard.length;i++){
+            int currCard=this.table.slotToCard[i];
+            this.deck.add(currCard);
+            this.table.slotToCard[i]=null;
+            this.env.ui.removeCard(i);
+            this.env.ui.removeTokens(i);
+        }
     }
 
     /**
@@ -132,5 +159,6 @@ public class Dealer implements Runnable {
      */
     private void announceWinners() {
         // TODO implement
+
     }
 }

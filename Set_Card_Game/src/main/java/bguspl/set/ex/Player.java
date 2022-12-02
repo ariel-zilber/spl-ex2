@@ -2,6 +2,8 @@ package bguspl.set.ex;
 
 import bguspl.set.Env;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * This class manages the players' threads and data
  *
@@ -95,6 +97,10 @@ public class Player implements Runnable {
             System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
             while (!terminate) {
                 // TODO implement player key press simulator
+                int numOfKeys=env.config.playerKeys(id).length;
+                int randomSlot = ThreadLocalRandom.current().nextInt(0, numOfKeys);
+                keyPressed(randomSlot);
+
                 try {
                     synchronized (this) { wait(); }
                 } catch (InterruptedException ignored) {}
@@ -120,7 +126,6 @@ public class Player implements Runnable {
     public void keyPressed(int slot) {
         System.out.println("[debug] Player.keyPressed:"+slot);
         this.table.placeToken(this.id,slot);
-
         // TODO implement
     }
 

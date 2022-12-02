@@ -23,10 +23,17 @@ class InputManager extends KeyAdapter {
         // initialize the keys
         for (int player = 0; player < env.config.players; ++player)
             for (int i = 0; i < env.config.playerKeys(player).length; i++) {
+
                 int keyCode = env.config.playerKeys(player)[i];
                 keyMap[keyCode] = player + 1; // 1 for first player and 2 for second player
                 keyToSlot[keyCode] = i;
+                System.out.println("[debug] InputManager mapper player :"+player+" keyCode:"+keyCode+" i:"+i);
             }
+
+        for(int i=0;i<keyMap.length;i++){
+            System.out.println("[debug] InputManager all keys!! index:"+i+" mapped code:"+keyMap[i]);
+
+        }
     }
 
     @Override

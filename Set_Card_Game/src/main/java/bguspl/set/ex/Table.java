@@ -95,6 +95,7 @@ public class Table {
         slotToCard[slot] = card;
 
         // TODO implement
+        this.env.ui.placeCard(card,slot);
     }
 
     /**
@@ -107,6 +108,8 @@ public class Table {
         } catch (InterruptedException ignored) {}
 
         // TODO implement
+        this.env.ui.removeCard(slot);
+
     }
 
     /**
@@ -116,6 +119,7 @@ public class Table {
      */
     public void placeToken(int player, int slot) {
         System.out.println("[debug] Table.placeToken player:"+player+",slot:"+slot);
+        this.env.ui.placeToken(player,slot);
 
         // TODO implement
     }
@@ -128,6 +132,7 @@ public class Table {
      */
     public boolean removeToken(int player, int slot) {
         System.out.println("[debug] Table.removeToken player:"+player+",slot:"+slot);
+        this.env.ui.removeToken(player,slot);
 
         // TODO implement
         return false;
