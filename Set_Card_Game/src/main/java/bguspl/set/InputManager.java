@@ -16,6 +16,8 @@ class InputManager extends KeyAdapter {
     int[] keyToSlot = new int[MAX_KEY_CODE + 1];
 
     public InputManager(Env env, Player[] players) {
+        System.out.println("[debug] InputManager");
+
         this.players = players;
 
         // initialize the keys
@@ -29,6 +31,8 @@ class InputManager extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("[debug] keyPressed:"+e.getKeyCode());
+
         // dispatch the key event to the player according to the key map
         int keyCode = e.getKeyCode();
         int player = keyMap[keyCode] - 1;

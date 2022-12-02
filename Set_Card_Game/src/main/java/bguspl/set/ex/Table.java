@@ -39,8 +39,8 @@ public class Table {
     public Table(Env env, Integer[] slotToCard, Integer[] cardToSlot) {
 
         this.env = env;
-        this.slotToCard = slotToCard;
-        this.cardToSlot = cardToSlot;
+        this.slotToCard = slotToCard; // [2,5,7,4,8,1,9,11,13]
+        this.cardToSlot = cardToSlot; // [NULL,3.1.0.42,NULL]
     }
 
     /**
@@ -115,6 +115,8 @@ public class Table {
      * @param slot   - the slot on which to place the token.
      */
     public void placeToken(int player, int slot) {
+        System.out.println("[debug] Table.placeToken player:"+player+",slot:"+slot);
+
         // TODO implement
     }
 
@@ -125,6 +127,8 @@ public class Table {
      * @return       - true iff a token was successfully removed.
      */
     public boolean removeToken(int player, int slot) {
+        System.out.println("[debug] Table.removeToken player:"+player+",slot:"+slot);
+
         // TODO implement
         return false;
     }

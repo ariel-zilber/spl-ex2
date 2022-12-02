@@ -38,6 +38,8 @@ public class Dealer implements Runnable {
     private long reshuffleTime = Long.MAX_VALUE;
 
     public Dealer(Env env, Table table, Player[] players) {
+        System.out.println("[debug] Dealer.constructor:");
+
         this.env = env;
         this.table = table;
         this.players = players;
@@ -76,6 +78,8 @@ public class Dealer implements Runnable {
      * Called when the game should be terminated due to an external event.
      */
     public void terminate() {
+        System.out.println("[debug] Dealer.terminate");
+
         // TODO implement
     }
 

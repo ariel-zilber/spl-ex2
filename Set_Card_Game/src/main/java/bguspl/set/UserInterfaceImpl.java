@@ -137,6 +137,13 @@ public class UserInterfaceImpl extends JFrame implements UserInterface {
                 }
             }
         }
+        //              0 1 2  3
+        // 0|0|0|0    0||0|1|2 |3
+        // 0|0|0|0    1||4|5|6 |7
+        // 0|0|0|0    2||8|9|10|11
+        // grid[row][col]=grid[4*row+col]
+        // grid[1][2]=6
+        // grid[4*1+2]=grid[6]
 
         private void placeCard(int slot, int card) {
             int row = slot / config.columns;
@@ -181,7 +188,10 @@ public class UserInterfaceImpl extends JFrame implements UserInterface {
             playerTokens[player][row][column] = false;
             tokenText[row][column].setText(generatePlayersTokenText(row, column));
         }
-
+        // Meni
+        // Marina
+        // playerNames:[Meni,Marina]
+        // [][][]
         private String generatePlayersTokenText(int row, int column) {
             String text = "";
             for (int player = 0; player < config.players; player++) {

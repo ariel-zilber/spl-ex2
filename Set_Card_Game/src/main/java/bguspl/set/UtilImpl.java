@@ -15,7 +15,10 @@ public class UtilImpl implements Util {
     public UtilImpl(Config config) {
         this.config = config;
     }
-
+    // 7 7&2 1
+    // card 3
+    // 3&2 1
+    //
     private void cardToFeatures(int card, int[] features) {
         for (int i = config.featureCount - 1; i >= 0; --i) {
             features[i] = card % config.featureSize;
@@ -39,6 +42,11 @@ public class UtilImpl implements Util {
 
     @Override
     public boolean testSet(int[] cards) {
+        // [[0 0 0 0],
+        // [0 0 0 1]]
+        // [{"color":"red","shape":"","num":1,"geometry":"square"},
+        // {"color":"red","shape":"","num":1,"geometry":"not-quare"}]
+        //
         int[][] features = cardsToFeatures(Arrays.copyOf(cards, cards.length));
         for (int i = 0; i < config.featureCount; ++i) {
             boolean sameSame = true, butDifferent = true;
@@ -51,6 +59,12 @@ public class UtilImpl implements Util {
                 }
 
             // check if this feature is butDifferent in all cards
+            //[0,1,2]
+            // [j-1,k]
+            // 0,1 02
+            // 1,2
+            // [0,1],[0,2]
+            // [1,2]
             for (int j = 1; j < features.length; ++j)
                 for (int k = j; k < features.length; ++k)
                     if (features[j - 1][i] == features[k][i]) {

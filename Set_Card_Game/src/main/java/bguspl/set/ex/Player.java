@@ -60,6 +60,7 @@ public class Player implements Runnable {
      * @param human  - true iff the player is a human player (i.e. input is provided manually, via the keyboard).
      */
     public Player(Env env, Dealer dealer, Table table, int id, boolean human) {
+        System.out.println("[debug] Player.constructor id:"+id+" human:"+human);
         this.env = env;
         this.table = table;
         this.id = id;
@@ -71,6 +72,7 @@ public class Player implements Runnable {
      */
     @Override
     public void run() {
+        System.out.println("[debug] Player.run");
         playerThread = Thread.currentThread();
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
         if (!human) createArtificialIntelligence();
@@ -87,6 +89,7 @@ public class Player implements Runnable {
      * key presses. If the queue of key presses is full, the thread waits until it is not full.
      */
     private void createArtificialIntelligence() {
+        System.out.println("[debug] Player.createArtificialIntelligence");
         // note: this is a very very smart AI (!)
         aiThread = new Thread(() -> {
             System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
@@ -105,6 +108,7 @@ public class Player implements Runnable {
      * Called when the game should be terminated due to an external event.
      */
     public void terminate() {
+        System.out.println("[debug] Player.terminate");
         // TODO implement
     }
 
@@ -114,6 +118,9 @@ public class Player implements Runnable {
      * @param slot - the slot corresponding to the key pressed.
      */
     public void keyPressed(int slot) {
+        System.out.println("[debug] Player.keyPressed:"+slot);
+        this.table.placeToken(this.id,slot);
+
         // TODO implement
     }
 
@@ -124,6 +131,7 @@ public class Player implements Runnable {
      * @post - the player's score is updated in the ui.
      */
     public void point() {
+        System.out.println("[debug] Player.point");
         // TODO implement
 
         int ignored = table.countCards(); // this part is just for demonstration in the unit tests
@@ -134,10 +142,13 @@ public class Player implements Runnable {
      * Penalize a player and perform other related actions.
      */
     public void penalty() {
+        System.out.println("[debug] Player.penalty");
         // TODO implement
     }
 
     public int getScore() {
+        System.out.println("[debug] Player.getScore:");
+
         return score;
     }
 }

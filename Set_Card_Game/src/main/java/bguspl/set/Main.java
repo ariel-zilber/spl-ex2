@@ -17,8 +17,11 @@ public class Main {
      * @param args - unused.
      */
     public static void main(String[] args) {
+        System.out.println("[debug] main");
 
         // create the game environment objects
+        System.out.println("[debug] create config");
+
         Config config = new Config("config.properties");
         UserInterfaceImpl ui = new UserInterfaceImpl(config);
         EventQueue.invokeLater(() -> ui.setVisible(true));
